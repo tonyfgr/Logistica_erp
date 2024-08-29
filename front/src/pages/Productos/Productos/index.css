@@ -1,0 +1,14 @@
+#textfields{
+    font-family: 'Poppins', sans-serif;
+}
+
+.list{
+    width: "100%"; 
+    max-width: 200; 
+    background-color: #EDECEF; 
+    border-radius:5
+}
+
+.list:hover{
+    background-color: #d5d4d8; 
+}

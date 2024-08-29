@@ -1,0 +1,14 @@
+#textfields{
+    font-family: 'Poppins', sans-serif;
+}
+*{
+    font-family: 'Poppins', sans-serif;
+}
+img{
+    object-fit: cover;
+    width:100% ;
+    height: 90%;
+}
+.my-swal {
+    z-index: 9999;
+  }

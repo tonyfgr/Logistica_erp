@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+*{
+    font-family: 'Poppins', sans-serif;
+}
+/* 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 18%;
+    background-color: #EDECEF;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    font-size: 0.9em;
+}
+li a {
+    display: flex;
+    color: #633256;
+    padding: 0.7em;
+    margin-right:1em;
+    margin-left: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    text-decoration: none;
+}
+li a .nav{
+    padding-left: 1em;
+}
+li a.active {
+    background-color: #633256;
+    color: white;
+}
+li a:hover:not(.active) {
+    background-color: #633256;
+    color: white;
+    border-radius: 0.3em;
+}
+.logo{
+    font-size:1em;
+    color: rgb(43, 42, 42);
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    letter-spacing:1em;
+}
+@media (max-width:1100px){
+    li .nav{
+        display: none;
+    }
+    .icon{
+        text-align: center;
+        align-items: center;
+    }
+} */
+
+.topnav {
+    background-color: #EDECEF;
+    width: 82%;
+    float: right;
+    height: 4em;
+    padding: 0.5em;
+}
+
+.buscar {
+    padding: 1em;
+}
+
+.logo{
+    font-size:1.4em;
+    color: rgb(43, 42, 42);
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    letter-spacing:1em;
+}
+#items{
+    font-family: 'Poppins', sans-serif;
+}
+a {
+    text-decoration: none;
+}

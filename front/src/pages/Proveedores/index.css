@@ -1,0 +1,17 @@
+body {
+   margin: 0;
+   padding: 0;
+}
+
+#textfields{
+   font-family: 'Poppins', sans-serif;
+}
+
+.paper-container{
+ overflow-x: auto;
+ margin-right: auto;
+ margin-left: auto;
+ margin-top: 50px;
+ padding: 10px;
+ margin: 10px;
+}
