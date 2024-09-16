@@ -47,8 +47,8 @@ const Login = () => {
 
             console.log(JSON.stringify(response?.data))
 
-            const access = response?.data?.accessToken
-            setAuth({email, password, access})
+            const accessToken = response?.data?.accessToken
+            setAuth(prev => ({email, password, accessToken}))
 
             setEmail('')
             setPassword('')
