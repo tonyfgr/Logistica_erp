@@ -3,27 +3,28 @@ services:
     image: mysql
     ports: 
         - "3306:3306"
-    command: --default-authentication-plugin=mysql_native_password
     environment:
         MYSQL_DATABASE: erp
         MYSQL_PASSWORD: test
         MYSQL_ROOT_PASSWORD: test
     volumes:
-        - ./db:/var/lib/mysql
         - my-db:/var/lib/mysql
+
   api:
     build: ./api       
     ports:
       - "8000:8000"
-    volumes:
-      - ./api:/api
-    command: python3 manage.py runserver 0.0.0.0:8000 
+    command: python3 manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db
+
   front:
     build: ./front
     ports:
       - "3000:3000"
     volumes:
       - exclude:/front/node_modules/
+
   api-node:
     build: ./api_node
     command: nodemon server.js localhost 9090
