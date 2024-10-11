@@ -1,30 +1,20 @@
 from pathlib import Path
-import os
+from os import environ
+from dotenv import load_dotenv
 
-# from datetime import timedelta
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+load_dotenv()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY =  environ.get('SECRET_KEY')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
+DEBUG = True if environ.get('DEBUG') == 'true' else False
 
-
-# USAR VARIABLES DE ENTORNO. TENER LA SECRET KEY AHÍ EN EL CÓDIGO ES MALO!!!.
-SECRET_KEY =  'django-insecure-@k(6mh4o=qj!7zs&^#=_rjax1$k5-4%2f-ijcplhd!1ksams)h'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-
-# CAMBIAR DEBUG A FALSE EN PRODUCCIÓN
-DEBUG = True
-
-# NO USAR * EN PRODUCCIÓN
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = environ.get('ALLOWED_HOSTS').split(',')
 
 # Application definition
-
-INSTALLED_APPS = [
+PROJECT_APPS = [
     'api_models',
     'api_proveedores',
     'api_ordenes_bienes_servicios',
@@ -38,23 +28,27 @@ INSTALLED_APPS = [
     'api_cajadiaria',
     'api_kardex_producto',
     'api_produccion_producto',
+]
+
+EXTERNAL_APPS = [
     'corsheaders',
     'rest_framework',
+]
+
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+] + PROJECT_APPS + EXTERNAL_APPS
+
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-    'https://erp-tecsup.vercel.app'
-]
+CORS_ORIGIN_WHITELIST = environ.get('CORS_ORIGIN_WHITELIST').split(',')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -94,10 +88,6 @@ WSGI_APPLICATION = 'erp.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-
-# USAR SQLITE EN DESARROLLO Y CAMBIAR A MYSQL AUTOMATICAMENTE EN PRODUCCIÓN
 if DEBUG:
     DATABASES = {
         'default': {
@@ -108,17 +98,14 @@ if DEBUG:
 else:
     DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'db',
-        'PORT': 3306,
-        'NAME': 'erp',
-        'USER': 'root',
-        'PASSWORD': 'test',
+        'ENGINE': f'django.db.backends.{environ.get("DB_ENGINE")}',
+        'HOST': environ.get('DB_HOST'),
+        'PORT': environ.get('DB_PORT'),
+        'NAME': environ.get('DB_NAME'),
+        'USER': environ.get('DB_USER'),
+        'PASSWORD': environ.get('DB_PASSWORD'),
     }
 }
-
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -136,9 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'America/Lima'
@@ -149,16 +133,14 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
 STATIC_URL = 'static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+STATIC_ROOT = BASE_DIR / 'staticfiles/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = 'media/'
 
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # cloudinary.config(

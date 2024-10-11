@@ -1,6 +1,6 @@
 FROM python:3.10.15-alpine3.19
 
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /api
 
@@ -12,4 +12,6 @@ RUN pip install --upgrade pip && \
 
 RUN python manage.py migrate
 
-ENTRYPOINT [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+RUN python manage.py collectstatic
+
+ENTRYPOINT [ "gunicorn", "--workers", "3", "--bind", "0.0.0.0:8000", "erp.wsgi" ]
